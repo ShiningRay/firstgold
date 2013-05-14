@@ -1,0 +1,16 @@
+<% form_for @user, :html => {:multipart => true} do |f|  %>
+  <%= error_messages_for :user %>
+  <p><%= f.label :name, '名字'%><br />
+  <%= f.text_field :name %></p>
+  <%# TODO: bio text area%>
+  <p><%= label_tag 'profile[bio]', '简介' %><br/>
+  <%= text_area_tag 'profile[bio]' %></p>
+  <%= image_tag @user.avatar.url %>
+  <p><%= f.label :avatar, '头像' %><br/>
+  <%= f.file_field :avatar %></p>
+  <p><%= f.label :password, '修改密码，不修改请留空' %><br/>
+  <%= f.password_field :password %></p>
+  <p><%= f.label :password_confirmation, '重复密码' %><br/>
+  <%= f.password_field :password_confirmation %></p>
+  <p><%= f.submit %></p>
+<% end %>

@@ -1,0 +1,11 @@
+<div class="category_nav">
+<div class="category">
+<strong><%= link_to category, category %></strong>
+<ul>
+<% for q in category.children.limited(3) %>
+  <li><%= link_to q.name, q %></li>
+<% end %>
+<li><%= link_to '&hellip;', category, :style => 'text-decoration:none' %></li>
+</ul>
+</div>
+</div>

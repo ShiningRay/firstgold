@@ -1,0 +1,7 @@
+<div class="avatar" id="<%= dom_id(user) %>">
+  <%= link_to image_tag( user.avatar.url(:thumb), :alt => user.to_s), user %>
+  <%= link_to user, user %> -
+  <%= user.roles.collect{|r|t(r.name, :scope => 'role')}.join(',') %> - 
+  <%# link_to user.questions.public.count, user_questions_path(user) %>
+  解决了<%= user.answers.accepted.count %>个问题
+</div>

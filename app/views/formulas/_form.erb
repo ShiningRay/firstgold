@@ -1,0 +1,38 @@
+<h1>New formula</h1>
+
+<% form_for(@formula) do |f| %>
+  <%= f.error_messages %>
+
+    <p>
+    <p>input</p>
+    <select name="inputkeys[]">
+      <% ItemTemplate.all.each do |item| %>
+      <option value="<%=item.id %>"><%= item.name %> </option>
+      <% end %>
+    </select>
+    <input name="inputvalues[]" type="text" value="" />
+    </p>
+    <p>
+    <p>output</p>
+     <select name="outputkeys[]">
+      <% ItemTemplate.all.each do |item| %>
+      <option value="<%=item.id %>"><%= item.name %> </option>
+      <% end %>
+    </select>
+    <input name="outputvalues[]" type="text" value="" />
+    </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+
+  <p></p>
+
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

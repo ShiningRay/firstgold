@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  item_id: 1
+  quantity: 1
+  description: MyText
+  upset_price: 1
+  increment: 1
+  status: MyString
+  expiration: 2010-05-01 23:46:58
+
+two:
+  item_id: 1
+  quantity: 1
+  description: MyText
+  upset_price: 1
+  increment: 1
+  status: MyString
+  expiration: 2010-05-01 23:46:58

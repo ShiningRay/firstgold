@@ -1,0 +1,11 @@
+<h1><%= @drop.new_record? ? 'New' : 'Edit'%>drop</h1>
+
+<% form_for [@npc, @drop] do |f|%>
+  <%= f.error_messages %>
+<p><%= f.label :item_template_id, 'Item' %><br/>
+  <%= f.collection_select(:item_template_id, ItemTemplate.all, :id, :name) %></p>
+<p><%= f.label :chance %><br/>
+  <%= f.text_field :chance %>
+</p>
+<p>  <%= f.submit @drop.new_record? ? 'Add' : 'Update' %></p>
+<% end %>

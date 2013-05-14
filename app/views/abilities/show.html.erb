@@ -1,0 +1,12 @@
+<%= image_tag @ability.icon.icon.url(:medium) %>
+<p>
+  <b>Name:</b>
+  <%=h @ability.name %>
+  <%= @ability.level %>
+</p>
+<p>
+  <%= h @ability.description %>
+</p>
+
+<%= link_to 'Edit', edit_ability_path(@ability) %> |
+<%= link_to 'Back', abilities_path %>

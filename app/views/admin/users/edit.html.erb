@@ -1,0 +1,32 @@
+<%= @user %>
+<dl>
+  <dt>登录名</dt>
+  <dd><%= @user.login %></dd>
+  <dt>名字</dt>
+  <dd><%= @user.name %></dd>
+  <dt>邮箱</dt>
+  <dd><%= link_to @user.email, 'mailto:'+@user.email %></dd>
+</dl>
+
+<h4>简介</h4>
+<p><%= format_text @user.profile['bio'] %></p>
+
+<h4>注册原因</h4>
+<p>
+<%= format_text @user.profile['why'] %>
+</p>
+<h4>建议</h4>
+<p><%= format_text @user.profile['suggestion'] %></p>
+<% form_for ['admin', @user] do |f| %>
+  <p>
+  <% for role in Role.find(:all)  %>
+    <%= check_box_tag 'user[role_ids][]', role.id,  @user.roles.include?(role) %><%=t role.name, :scope => 'role'  %>
+  <% end %>
+  </p>
+  <p>
+    <%= f.select :state, User.aasm_states_for_select %>
+  </p>
+  <p>
+  <%= f.submit t('Save') %>
+  </p>
+<% end %>

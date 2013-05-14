@@ -1,0 +1,23 @@
+<p>
+  <b>Npc:</b>
+  <%=h @drop.npc_id %>
+</p>
+
+<p>
+  <b>Item template:</b>
+  <%=h @drop.item_template_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%=h @drop.quantity %>
+</p>
+
+<p>
+  <b>Probability:</b>
+  <%=h @drop.probability %>
+</p>
+
+
+<%= link_to 'Edit', edit_drop_path(@drop) %> |
+<%= link_to 'Back', drops_path %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  auction_id: 1
+  bid_price: 1
+  character_id: 1
+
+two:
+  auction_id: 1
+  bid_price: 1
+  character_id: 1

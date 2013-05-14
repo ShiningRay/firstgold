@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  owner_id: 1
+  send_id: 1
+  recipient_id: 1
+  content: MyText
+  read: false
+  attachment: MyText
+
+two:
+  owner_id: 1
+  send_id: 1
+  recipient_id: 1
+  content: MyText
+  read: false
+  attachment: MyText

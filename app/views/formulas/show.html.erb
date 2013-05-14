@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @formula.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @formula.description %>
+</p>
+
+<p>
+  <b>Input:</b>
+  <%=h @formula.input %>
+</p>
+
+<p>
+  <b>Output:</b>
+  <%=h @formula.output %>
+</p>
+
+
+<%= link_to 'Edit', edit_formula_path(@formula) %> |
+<%= link_to 'Back', formulas_path %>

@@ -1,0 +1,15 @@
+<%= render :partial => 'form' %>
+
+<form method="post" action="<%= url_for npc_drops_path(@npc)%>">
+  <select name="item_template_id">
+    <% ItemTemplate.all.each do |item| %>
+      <option value="<%=item.id%>"><%= item.name %></option>
+    <% end %>
+  </select>
+  <label>Chance:  <input name="chance" type="text" value=""/> %</label>
+  <input type="submit" value="add" />
+</form>
+
+
+<%= link_to 'Show', @shop %> |
+<%= link_to 'Back', shops_path %>

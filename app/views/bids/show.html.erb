@@ -1,0 +1,18 @@
+<p>
+  <b>Auction:</b>
+  <%=h @bid.auction_id %>
+</p>
+
+<p>
+  <b>Bid price:</b>
+  <%=h @bid.bid_price %>
+</p>
+
+<p>
+  <b>Character:</b>
+  <%=h @bid.character_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_bid_path(@bid) %> |
+<%= link_to 'Back', bids_path %>

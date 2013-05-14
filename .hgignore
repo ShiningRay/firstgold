@@ -1,0 +1,29 @@
+syntax: glob
+
+nbproject
+nbproject/project.properties
+nbproject/project.xml
+log/production.log
+log/test.log
+config/database.yml
+log/development.log
+log/server.log
+log/*.log
+tmp/cache/*
+tmp/sessions/*
+tmp/pids/*
+tmp/sockets/*
+tmp/*
+Thumbs.db
+public/javascripts/closure
+public/system
+public/avatars
+public/attachments
+public/icons
+
+syntax: regexp
+\.rej$
+\.conflict\~$
+\.chg\..*$
+\.orig\..*$
+\.orig$

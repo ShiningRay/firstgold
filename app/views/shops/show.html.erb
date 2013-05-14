@@ -1,0 +1,21 @@
+<p>
+  <b>Owner:</b>
+  <%= link_to @shop.npc.name, @shop.npc if @shop.npc %>
+</p>
+
+
+<p>
+  <b>Description:</b>
+  <%=h @shop.description %>
+</p>
+
+<p>
+<%= link_to_remote 'List Merchandises', :method => :get, :update => "shop-#{@shop.id}-merchandiese", :url => shop_merchandises_path(@shop)  %>
+<p id="shop-<%= @shop.id %>-merchandiese"></p>
+<%= link_to 'Add merchandise', new_shop_merchandise_path(@shop)  %>
+</p>
+<% if is_admin? %>
+<%= link_to 'Edit', edit_shop_path(@shop) %> |
+
+<% end %>
+<%= link_to 'Back', shops_path %>

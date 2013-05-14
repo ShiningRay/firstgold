@@ -1,0 +1,40 @@
+<h1>Editing auction</h1>
+
+<% form_for(@auction) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :item_id %><br />
+    <%= f.text_field :item_id %>
+  </p>
+  <p>
+    <%= f.label :quantity %><br />
+    <%= f.text_field :quantity %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :upset_price %><br />
+    <%= f.text_field :upset_price %>
+  </p>
+  <p>
+    <%= f.label :increment %><br />
+    <%= f.text_field :increment %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :expiration %><br />
+    <%= f.datetime_select :expiration %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @auction %> |
+<%= link_to 'Back', auctions_path %>

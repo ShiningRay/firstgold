@@ -1,0 +1,15 @@
+<% if @merchandises %>
+<ul>
+<% for i in @merchandises %>
+  <li><%= image_tag  i.item_template.icon.url(:thumb) %>
+    <%= i.item_template.name %> <%= i.stock ?  "X #{i.stock}" : 'Unlimited' %>
+    $<%= i.price %>
+    <%= link_to 'Buy', buy_shop_merchandise_path(@shop, i),:method => :post  %>
+  <% if is_admin? %>
+    <%= link_to 'Edit', edit_shop_merchandise_path(@shop, i) %>
+    <%= link_to 'Destroy', [@shop, i], :confirm => 'Are you sure?', :method => :delete %>
+  <% end %></li>
+<% end %>
+</ul>
+<% end %>
+<%= link_to 'New merchandise', new_shop_merchandise_path(@shop) %>

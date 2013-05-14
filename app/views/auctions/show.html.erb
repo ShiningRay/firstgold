@@ -1,0 +1,33 @@
+<p>
+  <b><%= @auction.item_type %> :</b>
+  <%= render :partial => @auction.item %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @auction.description %>
+</p>
+
+<p>
+  <b>Upset price:</b>
+  <%=h @auction.upset_price %>
+</p>
+
+<p>
+  <b>Buyout price:</b>
+  <%=h @auction.buyout_price %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @auction.status %>
+</p>
+
+<p>
+  <b>Expiration:</b>
+  <%=h @auction.expiration %>
+</p>
+<%= link_to "Show Bids #{@auction.bids.count}", auction_bids_path(@auction) %>
+<%= link_to "Buyout", buyout_auction_path(@auction), :method => :post %>
+<%= link_to 'Edit', edit_auction_path(@auction) %> |
+<%= link_to 'Back', auctions_path %>

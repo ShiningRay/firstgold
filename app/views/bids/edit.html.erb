@@ -1,0 +1,24 @@
+<h1>Editing bid</h1>
+
+<% form_for(@bid) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :auction_id %><br />
+    <%= f.text_field :auction_id %>
+  </p>
+  <p>
+    <%= f.label :bid_price %><br />
+    <%= f.text_field :bid_price %>
+  </p>
+  <p>
+    <%= f.label :character_id %><br />
+    <%= f.text_field :character_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @bid %> |
+<%= link_to 'Back', bids_path %>

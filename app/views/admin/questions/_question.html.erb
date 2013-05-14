@@ -1,0 +1,8 @@
+  <tr>
+    <td><%=link_to question.title, question %></td>
+    <td><%=link_to question.user, question.user unless question.anonymous%></td>
+    <td><%=l question.created_at %></td>
+    <% s=question.content.mb_chars %>
+    <td><%= s.length > 30 ? s[0,30] + '...' : s  %></td>
+    <td><%= question.answers.count %></td>
+  </tr>

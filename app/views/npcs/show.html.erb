@@ -1,0 +1,13 @@
+<h1><%=h @npc.name %></h1>
+<% for attr in Stats::Fields %>
+<p><%= attr %>: <%= @npc.send(attr) %></p>
+<% end %>
+<p><%=h @npc.description%></p>
+<h2>Drop Table</h2>
+<% if @npc.drops %>
+<%= render :partial => @npc.drops %>
+<% end %>
+<%= link_to 'New Drop', new_npc_drop_path(@npc) %>
+  
+<%= link_to 'Edit', edit_npc_path(@npc) %> |
+<%= link_to 'Back', npcs_path %>

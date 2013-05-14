@@ -1,0 +1,10 @@
+
+<p>
+  <b>Name:</b>
+  <%=h @icon.name %>
+  <%= image_tag @icon.icon.url(:medium) %>
+</p>
+
+
+<%= link_to 'Edit', edit_icon_path(@icon) %> |
+<%= link_to 'Back', icons_path %>

@@ -1,0 +1,20 @@
+<h1>Listing icons</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% for icon in @icons %>
+  <tr>
+    <td><%= image_tag icon.icon.url(:thumb)%><%=h icon.name %></td>
+    <td><%= link_to 'Show', icon %></td>
+    <td><%= link_to 'Edit', edit_icon_path(icon) %></td>
+    <td><%= link_to 'Destroy', icon, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New icon', new_icon_path %>

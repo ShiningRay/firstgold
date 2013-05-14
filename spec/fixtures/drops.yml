@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  npc_id: 1
+  item_template_id: 1
+  quantity: 1
+  probability: 1
+
+two:
+  npc_id: 1
+  item_template_id: 1
+  quantity: 1
+  probability: 1

@@ -1,0 +1,24 @@
+<dl>
+  <dt>登录名</dt>
+  <dd><%= @user.login %></dd>
+  <dt>名字</dt>
+  <dd><%= @user.name %></dd>
+  <dt>邮箱</dt>
+  <dd><%= @user.email %></dd>
+</dl>
+
+<h4>简介</h4>
+<p><%= format_text @user.profile['bio'] %></p>
+
+<h4>注册原因</h4>
+<p>
+<%= format_text @user.profile['why'] %>
+</p>
+<h4>建议</h4>
+<p><%= format_text @user.profile['suggestion'] %></p>
+
+<% for r in @user.roles %>
+  <%= r %>
+<% end %>
+
+<div><%= link_to t("Back"), admin_users_path %></div>

@@ -1,0 +1,38 @@
+<p>
+  <b>Item:</b>
+  <%=h @merchandise.item_id %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%=h @merchandise.price %>
+</p>
+
+<p>
+  <b>Limit:</b>
+  <%=h @merchandise.limit %>
+</p>
+
+<p>
+  <b>Stock:</b>
+  <%=h @merchandise.stock %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @merchandise.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @merchandise.description %>
+</p>
+
+<p>
+  <b>Shop:</b>
+  <%=h @merchandise.shop_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_merchandise_path(@merchandise) %> |
+<%= link_to 'Back', merchandises_path %>

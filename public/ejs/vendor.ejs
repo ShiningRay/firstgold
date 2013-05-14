@@ -1,0 +1,8 @@
+<table>
+<tr>
+<% $.each(items, function(i, item){ %>
+<td><%= item.name %></td><td><%= item.price %></td><td><a href="javascript:buy('<%=item.id%>')">Buy</a></td>
+<% }) %>
+</tr>
+</table>
+

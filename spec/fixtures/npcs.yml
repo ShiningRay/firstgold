@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+seller:
+  name: seller
+  description: a seller
+  str: 1
+  agi: 1
+  spr: 1
+  hp: 1
+  mp: 1
+
+two:
+  name: MyString
+  description: MyText
+  str: 1
+  agi: 1
+  spr: 1
+  hp: 1
+  mp: 1

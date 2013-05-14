@@ -1,0 +1,23 @@
+<h1>Listing bids</h1>
+
+<table>
+  <tr>
+    <th>Auction</th>
+    <th>Bid price</th>
+    <th>Character</th>
+  </tr>
+
+<% @bids.each do |bid| %>
+  <tr>
+    <td><%=h bid.bid_price %></td>
+    <td><%=h bid.bidder.try(:name) %></td>
+    <td><%= link_to 'Edit', edit_auction_bid_path(@auction, bid) %></td>
+    <td><%= link_to 'Destroy', [@auction, bid], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New bid', new_auction_bid_path(@auction) %>
+<%= link_to 'Back', @auction %>

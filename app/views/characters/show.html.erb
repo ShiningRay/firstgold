@@ -1,0 +1,38 @@
+<%= render :partial => @character %>
+<ul>
+  <% for slot in Character::EquipmentSlots %>
+  <li>
+  <%= slot %>
+  <% item = @character.equipments[slot] %>
+  <% if item %>
+  <%= link_to item.name, item.template %>
+  <%= link_to 'unequip', unequip_character_item_path(@character, item) %>
+  <% end %>
+  </li>
+  <% end %>
+</ul>
+<h3>Inventory</h3>
+<ul>
+<% for item in @character.inventory %>
+  <li>
+    <%= image_tag item.template.icon.url(:thumb) %>
+    <%= link_to item.name,[@character, item]%>
+    <% if item.equipable?  %>
+    <%= link_to 'equip', equip_character_item_path(@character, item) %>
+    <%= link_to 'refresh', refresh_character_item_path(@character, item) %>
+    <% end %>
+    <%= link_to 'dispose', character_item_path(@character, item), :method => :delete, :confirm => 'Are you sure?' %>
+  </li>
+<% end %>
+</ul>
+
+<h3>Abilities</h3>
+<ul>
+<% for ability in [] #@character.abilities %>
+  <li><%#image_tag ability.icon.icon.url(:thumb)%> <%= link_to "#{ability.name} - #{ability.level}"%> </li>
+<% end %>
+</ul>
+
+<%= link_to 'Enter game', :controller => :game, :action => :index, :id => @character.id %>
+<%= link_to 'Edit', edit_character_path(@character) %> |
+<%= link_to 'Back', @character.user %>

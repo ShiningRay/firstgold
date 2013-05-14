@@ -1,0 +1,19 @@
+<h1>Listing npcs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% for npc in @npcs %>
+  <tr>
+    <td><%= link_to h(npc.name), npc %></td>
+    <td><%= link_to 'Edit', edit_npc_path(npc) %></td>
+    <td><%= link_to 'Destroy', npc, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New npc', new_npc_path %>

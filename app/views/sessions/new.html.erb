@@ -1,0 +1,17 @@
+
+<h1><%= title t(:Log_in)%></h1>
+
+<% form_tag session_path do -%>
+<p><%= label_tag('login',t("Login")) %><br />
+<%= text_field_tag 'login', @login %></p>
+
+<p><%= label_tag('password',t("Password"))  %><br/>
+<%= password_field_tag 'password', nil %></p>
+
+<p><%= label_tag 'remember_me', t('Remember_me') %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+<p><%# image_tag captcha_path%><%# label_tag 'captcha', '请输入验证码' %><br/>
+<%#= text_field_tag 'captcha', params[:captcha], :size => 4 %>
+</p>
+<p style="clear:left"><%= submit_tag t('Log_in') %> <%= link_to t('Register'), signup_path %></p>
+<% end -%>

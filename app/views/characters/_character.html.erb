@@ -1,0 +1,42 @@
+<p><%= character.name%></p>
+<input type="hidden" id="character_id" value="<%=character.id%>" />
+Level <%= character.lvl %>
+<h3>Base Stats</h3>
+Experiences: <%= character.exp %> / <%= character.next_exp %>
+  <p>HP: <%= character.current_hp %> / <%= character.hp %></p>
+  <p>MP: <%= character.current_mp %> / <%= character.mp %></p>
+
+<ul>
+  <li>Strength: <span id="str"><%= character.str %></span>
+  <%= link_to '+', inc_point_character_path(character, :attr => :str), :method => :post if character.points > 0 %>
+  
+      </li>
+  <li>Agility: <span id="agi"><%= character.agi %></span>
+    <%= link_to '+', inc_point_character_path(character, :attr => :agi), :method => :post if character.points > 0 %>
+      </li>
+  <li>Intelligence: <span id="spr"><%= character.spr %></span>
+  <%= link_to '+', inc_point_character_path(character, :attr => :spr), :method => :post if character.points > 0 %>
+        </li>
+</ul>
+Rest points: <input type="text" readonly="readonly" name="points" id="rest_points" value="<%=character.points%>" size="2"/>
+<script type="text/javascript">
+$(function(){
+  $('.attr_plus').click(function(){
+    var e = $(this);
+    $.post('/characters/'+$('#character_id').val()+'/inc_point', {'attr': this.name}, function(data,status){
+      $('#rest_points').val(data);
+      var name = e.attr('name');
+      var e1 = $('#'+name);
+      var o = parseInt(e1.text());
+      o++;
+      e1.text(o);
+    });
+  });
+})
+</script>
+
+  <li>Damage: <%# character.dmg1 %> - <%# character.max_dmg %></li>
+<% for attr in Stats::Fields %>
+<p><%= attr %>: <%= character.send(attr) %></p>
+<% end %>
+<%# render :partial => 'abilities', :object => character.abilities %>

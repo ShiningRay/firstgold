@@ -1,0 +1,29 @@
+<h1>Listing item_templates</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Slot</th>
+    <th>Max stack</th>
+    <th>Extra</th>
+  </tr>
+
+<% @item_templates.each do |item_template| %>
+  <tr>
+    <td><%= image_tag item_template.icon.url(:thumb) %></td>
+    <td id="item_template_<%= item_template.id %>"><%=h item_template.name %></td>
+    <td><%=h item_template.price %></td>
+    <td><%=h item_template.slot %></td>
+    <td><%=h item_template.max_stack %></td>
+    <td><%=h item_template.extra %></td>
+    <td><%= link_to 'Show', item_template %></td>
+    <td><%= link_to 'Edit', edit_item_template_path(item_template) %></td>
+    <td><%= link_to 'Destroy', item_template, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New item_template', new_item_template_path %>

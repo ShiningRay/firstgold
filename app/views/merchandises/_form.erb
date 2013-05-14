@@ -1,0 +1,30 @@
+<h1><%= @merchandise.new_record? ? 'New' : 'Editing' %> merchandise</h1>
+
+<% form_for([@shop, @merchandise]) do |f| %>
+  <%= f.error_messages %>
+  <p><%= f.label :item_template_id, 'Item' %><br/>
+  <%= f.collection_select(:item_template_id, ItemTemplate.all, :id, :name) %></p>
+  <p>
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :limit %><br />
+    <%= f.text_field :limit %>
+  </p>
+  <p>
+    <%= f.label :stock %><br />
+    <%= f.text_field :stock %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit @merchandise.new_record? ? 'Create' : 'Update' %>
+  </p>
+<% end %>

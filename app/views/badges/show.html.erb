@@ -1,0 +1,24 @@
+<%= image_tag @badge.icon.icon.url(:medium) %>
+<p>
+  <b>Name:</b>
+  <%=h @badge.name %>
+</p>
+
+<p>
+  <b>Level:</b>
+  <%=h @badge.level %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @badge.description %>
+</p>
+
+<h3>The following characters has achieved this badges</h3>
+<ul>
+<% for character in @badge.characters %>
+  <li><%= link_to character.name, character %></li>
+<%end%>
+</ul>
+<%= link_to 'Edit', edit_badge_path(@badge) %> |
+<%= link_to 'Back', badges_path %>

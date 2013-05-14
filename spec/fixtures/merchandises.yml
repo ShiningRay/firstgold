@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  item_id: 1
+  price: 1
+  limit: 1
+  stock: 1
+  name: MyString
+  description: MyText
+  shop_id: 1
+
+two:
+  item_id: 1
+  price: 1
+  limit: 1
+  stock: 1
+  name: MyString
+  description: MyText
+  shop_id: 1

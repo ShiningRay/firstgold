@@ -1,0 +1,19 @@
+<%= title  @user.to_s %>
+<%# image_tag @user.avatar.url(:thumb) %>
+<%= h(@user.login) %>
+<%= link_to t('Edit'), edit_user_path(@user) if @is_current %>
+<h3>Characters</h3>
+<ul>
+<% @user.characters.each do |c| %>
+  <li><%= link_to c.name, c %>
+     
+  <% if @is_current %>
+    <%= link_to 'Enter game', :controller => :game, :id => c.id %>
+    <%= link_to 'Destroy', c, :confirm => 'Are you sure?', :method => :delete %>
+  <% end %>
+</li>
+<% end %>
+</ul>
+<% if @is_current %>
+  <%= link_to 'Create new character', new_character_path %>
+<%  end %>

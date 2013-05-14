@@ -1,0 +1,29 @@
+<% form_tag do %>
+<table>
+  <tr>
+    <td></td>
+    <td>用户名</td>
+    <td>类型</td>
+    <td>身份证</td>
+    <td>简介</td>
+    <td>注册原因</td>
+    <td>建议</td>
+  </tr>
+  <% for u in @pending_users %>
+  <tr>
+    <td>
+      <%= check_box_tag "ids[#{u.id}]", '1', true %>
+      <%= hidden_field_tag "ids[#{u.id}]", '0' %>
+    </td>
+    <td><%= link_to u, edit_admin_user_path(u) %></td>
+    <td><%= t u.roles, :scope => 'role' %></td>
+    <td><%= u.profile['ID'] %></td>
+    <td><%= format_text u.profile['bio'] if u.profile['bio']%></td>
+    <td><%= format_text u.profile['why'] if u.profile['why']%></td>
+    <td><%= format_text u.profile['suggestion'] if u.profile['suggestion']%></td>
+  </tr>
+  <% end %>
+</table>
+<%= submit_tag '通过选中的'%>
+未选中的将被删除
+<% end %>

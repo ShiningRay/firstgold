@@ -1,0 +1,32 @@
+<p>
+  <b>Name:</b>
+  <%=h @item_template.name %>
+</p>
+<p>
+  <%= image_tag @item_template.icon.url(:thumb) %>
+</p>
+<p>
+  <b>Price:</b>
+  <%=h @item_template.price %>
+</p>
+
+<p>
+  <b>Slot:</b>
+  <%=h @item_template.slot %>
+</p>
+
+<p>
+  <b>Max stack:</b>
+  <%=h @item_template.max_stack %>
+</p>
+
+<p>
+  <b>Extra:</b>
+<dl>
+  <%= debug @item_template.extra %>
+</dl>
+</p>
+
+
+<%= link_to 'Edit', edit_item_template_path(@item_template) %> |
+<%= link_to 'Back', item_templates_path %>

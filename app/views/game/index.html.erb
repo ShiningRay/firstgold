@@ -1,0 +1,193 @@
+<style type="text/css">
+html, body { height:100%; }
+body { margin:0; }
+#error { color: red }
+div#character-list{}
+div.character{float:left;width:40px;height:40px;margin:10px;border:1px #eee solid;background:#fff}
+div.target{border:1px #000 solid}
+div.self{background:#eee;}
+div.dead{background-color:red}
+#templates{display:none;visibility:hidden}
+ol#chat{overflow:scroll;height:300px}
+li.say{color:blue}
+div.clear{clear:both}
+.buff{font-weight:bold;text-decoration:underline}
+.hpinfo{display:none;position:absolute}
+.combatinfo{
+  position:absolute;
+  font-size: 24px;
+  color: red;
+}
+.boundedbar {
+  float:left;
+  width:100px;
+  border:1px solid #000;
+  height: 10px
+}
+.character .boundedbar{width:100%;height:5px;}
+.boundedbar div{height:100%;}
+#expbar div{background-color:yellow;}
+.hpbar div{background-color:red}
+.stats {display:none}
+</style>
+<script type="text/javascript">
+</script>
+<%=javascript_include_tag 'swfobject', 'js/class', 'js/observable', 'socket', 'actions', 'jquery.json-1.3', 'ejs_production'%>
+<script type="text/javascript">
+
+var Target, coolingdown={};
+Session.character_id='<%= @character.id %>';
+
+$(function(){
+    $('#stats_button').click(function(){$('.stats').toggle()});
+});
+
+if(!console){
+	var console = {
+		debug: function(){},
+		info: function(){}
+	}
+}
+
+function on_receive(d){
+    var args = d.split(' ');
+    console.debug(args);
+
+    var action = args.shift();
+    if(typeof Action[action] == 'function'){
+        Action[action].apply(Action,args);
+    }
+}
+
+var outgoing_failures=0;
+var outgoingQueue=[], outgoing_checkConnectedTimeout;
+
+function send(d){
+    flash_status('sending');
+    if(Socket.isConnected()){
+        console.info('connected, send', d);
+        Socket.send(d.join(' ')+"\n");
+        Socket.flush();
+    }else{
+        console.info('not connected, wait');
+        outgoingQueue.push(d);
+    }
+}
+
+var conn_status=null;
+function set_status(text){
+    conn_status=text;
+    $("#status").text(text);
+}
+
+function flash_status(text){
+    $("#status").text(text);
+    setTimeout(set_status, 100, conn_status);
+}
+
+Socket.connected = function(){
+	console.info('incoming connection established');
+	//Self.name = $('#login').val();
+	//send([$('#login').val()]);
+    var m = window.location.href.match(/[a-z0-9]+$/);
+    var m = m[0];
+    send(['login', m+'&'+m]);
+	set_status('connected');
+}
+Socket.ready = function(){
+    set_status('connecting');
+    Socket.connect(window.location.hostname, 8000);
+}
+var __rest;
+Socket.data = function(d){
+	console.debug(d);
+	var lines = d.split("\n");
+	var l = lines.length;
+	if(l--==0){ return; }
+	if(__rest){
+		lines[0] = __rest + lines[0];
+	}
+	if(lines[l].indexOf("\n") == -1){
+		__rest = lines.pop();
+	}
+	$.each(lines, function(){
+		setTimeout(on_receive, 0, $.trim(this));
+	});
+}
+
+Socket.closed = function(){
+	console.info('incoming connection closed');
+	console.debug(arguments);
+	set_status('closed');
+}
+
+$(function(){
+    $('#send').click(function(){
+        send(['say', $('#message').val()]);
+        $('#message').val('');
+    });
+    $('#message').keypress(function(e){
+        if(e.which == 13){
+            var a = $(this);
+            var c = a.val();
+            if(c.length>0){ // don't send empty message
+                send(['say',c]);
+                a.val('');  //clear input
+            }
+        }
+    });
+});
+	</script>
+
+    <div id="stage"></div>
+    <div id="status">Disconnected</div>
+	<h1><%= @character.scenario.name %></h1>
+	<p><%= @character.scenario.description %></p>
+    <div id="expbar" class="boundedbar"><div id="exp"></div></div>
+    <div id="hpbar" class="boundedbar hpbar" ><div></div></div>
+  <p></p>
+  <button id="stats_button">Character Stats</button>
+<table class="stats">
+  <caption>Stats</caption>
+  <tr><th>Level</th><td class="lvl">-</td></tr>
+  <tr><th>Experience</th><td><span class="exp"></span>/<span class="next_exp"></span></td></tr>
+  <tr><td colspan="2"></td></tr>
+  <tr><th>Strength</th><td class="str">-</td></tr>
+  <tr><th>Agility</th><td class="agi">-</td></tr>
+  <tr><th>Spirit</th><td class="spr">-</td></tr>
+  <tr><td colspan="2"></td></tr>
+  <tr><th>Points</th><td class="points">-</td></tr>
+  <tr><td colspan="2"></td></tr>
+  <tr><th>Hit Rate</th><td class="hit_rate">-</td></tr>
+  <tr><th>Dodge Rate</th><td class="dodge_rate">-</td></tr>
+  <tr><th>Damage</th><td><span class="dmg1"></span>-<span class="dmg2"></span></td></tr>
+  <tr><td colspan="2"></td></tr>
+  <tr><th>HitPoints</th><td><span class="current_hp"></span>/<span class="hp"></span></td></tr>
+  <tr><th>ManaPoints</th><td><span class="current_mp"></span>/<span class="mp"></span></td></tr>
+  <tr><td colspan="2"></td></tr>
+  <tr><th>money</th><td id="money">-</td></tr>
+</table>
+<table width="100%"  style="background: url(/images/scenario/<%=@character.scenario.background%>)">
+  <tr>
+    <td>
+    <div id="character-list" >
+    </div>
+	<div class="clear"></div>
+	<div id="abilities">
+    </div>
+    <div style="clear:both"></div>
+    <!--<h2>Error:</h2>-->
+    <div id="error"></div>
+</td></tr>
+  <tr>
+<td bgcolor="white">
+  <h1 id="title"></h1>
+  <ol id="chat"> </ol>
+  <p><input type="text" id="message" value="" /><input type="button" id="send" value="send" /></p>
+</td></tr>
+</table>
+<div id="socket">
+    <h1>SocketBridge</h1>
+    <p>Alternative content</p>
+    <p></p>
+</div>

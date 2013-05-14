@@ -1,0 +1,21 @@
+<% title t("Home") %>
+
+<h3>Management Section</h3>
+<ul>
+<li><%= link_to 'Ability Index', abilities_path %></li>
+<li><%= link_to 'Item Index', item_templates_path %></li>
+<li><%= link_to 'Badge Index', badges_path %></li>
+<li><%= link_to 'Scenario Index', scenarios_path %></li>
+<li><%= link_to 'NPC Index', npcs_path %></li>
+<li><%= link_to 'Shops Index', shops_path %></li>
+<li><%=  link_to 'auctions index', auctions_path%></li>
+</ul>
+
+<h3>Recent Registered User</h3>
+<%@users.each do |user| %>
+<%=user.login%>
+<%=user.created_at%>
+<%end%>
+
+<h3>Latest Badges</h3>
+* [Who] got [What]

@@ -1,0 +1,30 @@
+<h1>Listing mails</h1>
+
+<table>
+  <tr>
+    <th>Owner</th>
+    <th>Send</th>
+    <th>Recipient</th>
+    <th>Content</th>
+    <th>Read</th>
+    <th>Attachment</th>
+  </tr>
+
+<% @mails.each do |mail| %>
+  <tr>
+    <td><%=h mail.owner_id %></td>
+    <td><%=h mail.send_id %></td>
+    <td><%=h mail.recipient_id %></td>
+    <td><%=h mail.content %></td>
+    <td><%=h mail.read %></td>
+    <td><%=h mail.attachment %></td>
+    <td><%= link_to 'Show', mail %></td>
+    <td><%= link_to 'Edit', edit_mail_path(mail) %></td>
+    <td><%= link_to 'Destroy', mail, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New mail', new_mail_path %>

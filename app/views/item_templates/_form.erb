@@ -1,0 +1,50 @@
+<h1><%= @item_template.new_record? ? 'New' : 'Editing' %> item_template</h1>
+
+<% form_for(@item_template, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :slot %><br />
+    <%= f.text_field :slot %>
+  </p>
+  <p>
+    <%= f.label :max_stack %><br />
+    <%= f.text_field :max_stack %></p>
+  <p>Requirements<br/>
+  <% for i in [:lvl, :str, :agi, :spr] %>
+    <%=i%><%=extra_text_field @item_template, [:requirements, i] %>
+    <br/>
+  <% end %>
+  </p>
+  <p>Damage<br/>
+    <%=extra_text_field @item_template, :min_dmg %> - <%=extra_text_field @item_template, :max_dmg %>
+  </p>
+  <p>Magic Power<br/>
+    <%=extra_text_field @item_template, :mp %>
+  </p>
+  <p>Speed<br/>
+    <%=extra_text_field @item_template, :speed %>
+  </p>
+  <p>Reference Level<br/>
+    <%=extra_text_field @item_template, :ref_level %>
+  </p>
+  <p>Max Level<br/>
+    <%=extra_text_field @item_template, :max_level %>
+  </p>
+
+  <p>
+    <%= f.label :icon %><br />
+    <%= f.file_field :icon %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

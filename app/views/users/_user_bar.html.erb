@@ -1,0 +1,10 @@
+<% if logged_in? -%>
+  <span id="user-bar-greeting"><%=t(:Logged_in_as)%><%= link_to_current_user :content_method => :login %></span>
+  <span id="user-bar-action"  >(<%= link_to t("Log_out"), logout_path, { :title => "Log out" }    %>)</span>
+  <%# link_to 'Administration', admin_home_path, :target => '_blank' if current_user.has_role?("admin") %>
+  <%= link_to current_character.name, current_character if current_character %>
+<% else -%>
+  <span id="user-bar-greeting"><%= link_to_login_with_IP t('Not_logged_in'), :style => 'border: none;' %></span>
+  <span id="user-bar-action"  ><%= link_to t("Log_in"),  login_path,  { :title => "Log in" } %> /
+                              <%= link_to t("Sign_up"), signup_path, { :title => "Create an account" } %></span>
+<% end -%>

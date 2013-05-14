@@ -1,0 +1,33 @@
+<p>
+  <b>Owner:</b>
+  <%=h @mail.owner_id %>
+</p>
+
+<p>
+  <b>Send:</b>
+  <%=h @mail.send_id %>
+</p>
+
+<p>
+  <b>Recipient:</b>
+  <%=h @mail.recipient_id %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%=h @mail.content %>
+</p>
+
+<p>
+  <b>Read:</b>
+  <%=h @mail.read %>
+</p>
+
+<p>
+  <b>Attachment:</b>
+  <%=h @mail.attachment %>
+</p>
+
+
+<%= link_to 'Edit', edit_mail_path(@mail) %> |
+<%= link_to 'Back', mails_path %>
