@@ -3,6 +3,7 @@ class InsufficientMoney < StandardError
 end
 class RequirementsNotMet < StandardError
 end
+require 'ability'
 class Character < ActiveRecord::Base
   def notify *_args;  end
   belongs_to :user

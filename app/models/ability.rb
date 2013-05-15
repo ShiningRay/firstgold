@@ -10,7 +10,7 @@ end
 
 class GameError < Exception
 end
-
+require 'random'
 class AbilityFactory
   cattr_accessor :discovered
   @@discovered = {}
