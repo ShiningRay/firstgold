@@ -1,12 +1,15 @@
 # -*- encoding : utf-8 -*-
-require 'rubygems'
+require File.dirname(__FILE__) + '/../config/environment'
+
+require 'logger'
+$logger = Logger.new STDOUT
+$logger.level=Logger::Severity::DEBUG
 #require 'ruby-debug'
 require 'eventmachine'
-require 'model'
 require 'json'
 require 'ap'
 # for online characters
-
+require 'ability'
 module FirstGold
   module Server
     module Commands
@@ -179,7 +182,7 @@ Npc.class_eval do
 end
 EM.run { 
   EM.start_server('0.0.0.0', 8000, FirstGold::Server::Connection) {|conn|
-    conn.scenario = Scenario[0].init_server
+    conn.scenario = Scenario.find_by_coordinate(0,0).init_server
   }
 }
 irb_t.join

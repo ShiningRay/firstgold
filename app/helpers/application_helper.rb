@@ -9,9 +9,9 @@ module ApplicationHelper
   def blueprint_css
     stylesheet_link_tag( 'screen', :media => 'screen,projection') +
     stylesheet_link_tag( 'print', :media => 'print') +
-    '<!--[if IE]>' +
+    '<!--[if IE]>'.html_safe +
     stylesheet_link_tag( 'ie', :media => 'screen,projection') +
-    '<![endif]-->'
+    '<![endif]-->'.html_safe
   end
   # show an question icon
   def icon(name)

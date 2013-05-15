@@ -126,6 +126,7 @@ Firstgold::Application.routes.draw do
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
+  match 'game' => 'game#index'
   match ':controller/:action/:id'
   match ':controller/:action/:id.:format'
 end

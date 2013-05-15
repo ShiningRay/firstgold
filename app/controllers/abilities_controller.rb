@@ -3,7 +3,7 @@ class AbilitiesController < ApplicationController
   # GET /abilities
   # GET /abilities.xml
   def index
-    @abilities = Ability.all
+    @abilities = Ability.to_a
     
     respond_to do |format|
       format.html # index.html.erb

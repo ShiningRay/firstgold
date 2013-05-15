@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Scenario < ActiveRecord::Base
-  include IdentityMap
+  #include IdentityMap
   has_many :npcs
   has_many :characters
   belongs_to :owner, :class_name => 'Character'
@@ -12,8 +12,6 @@ class Scenario < ActiveRecord::Base
                                  :thumb => "16x16#"},
                     :default_url =>"/images/scenario/2.gif"
                                  
-  def after_initialize
-  end
 
   def self.id_from_coordinate(x,y)
     (y << 4) | x
@@ -45,10 +43,11 @@ class Scenario < ActiveRecord::Base
   
   def self.find_by_coordinate x, y
     i = (y.to_i << 4) + x.to_i
-    a = self[i]
+    a = self.find_by_id(i)
     unless a
       a = new
       a.id = i
+      a.save
     end
     a
   end

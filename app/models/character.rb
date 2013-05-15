@@ -16,6 +16,7 @@ class Character < ActiveRecord::Base
   has_many :mails, :foreign_key => 'owner_id'
   has_and_belongs_to_many :badges
   belongs_to :scenario
+  attr_accessible :name
   
   include IdentityMap
   include Stats
@@ -43,8 +44,8 @@ class Character < ActiveRecord::Base
       end
     end
   end
-
-  def after_initialize
+  after_initialize :init
+  def init
     puts "initialize"
     init_stats
     self.equipments={}
@@ -120,7 +121,7 @@ class Character < ActiveRecord::Base
   end
 
   #
-  def as_json
+  def as_json(opt={})
     Stats::Fields.each do |f|
       send f
     end
@@ -135,9 +136,6 @@ class Character < ActiveRecord::Base
     v
   end
 
-  def to_json
-    as_json.to_json
-  end
 
   # get equipment from specific slot
   def get_slot(slot)

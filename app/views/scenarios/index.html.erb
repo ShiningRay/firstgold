@@ -9,7 +9,7 @@
       <% if @scenarios[i] %>
       <%= link_to image_tag( @scenarios[i].background.url(:thumb) ), scenario_path(@scenarios[i])  %>
       <% else %>
-      <%= link_to 'buy', buy_scenario_path("#{x}-#{y}") %>
+      <%= link_to 'buy', buy_scenario_path("#{x}-#{y}"), :method => :post %>
       <% end %>
     </td>
 <% end %>

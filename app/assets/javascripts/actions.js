@@ -1,3 +1,4 @@
+//= require_tree ./js
 if (!String._FORMAT_SEPARATOR){
     String._FORMAT_SEPARATOR = String.fromCharCode(0x1f);
     String._FORMAT_ARGS_PATTERN = new RegExp('^[^' + String._FORMAT_SEPARATOR + ']*'

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class NpcsController < ApplicationController
-  before_filter :admin_required, :except => :show
+  #before_filter :admin_required, :except => :show
   before_filter :find_npc, :except => [:index, :new, :create]
   # GET /npcs
   # GET /npcs.xml

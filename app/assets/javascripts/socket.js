@@ -2,6 +2,7 @@
  * wrap low-level flash socket bridge apis
  * provide observe patterns
  */
+//= require swfobject
 swfobject.embedSWF("/javascripts/SocketBridge.swf", "socket", "0", "0", "9.0.0", "expressInstall.swf", {}, {
     menu: "false",
     scale: "noScale",
