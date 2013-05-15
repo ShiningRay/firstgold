@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MailsController < ApplicationController
   # GET /mails
   # GET /mails.xml

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AbilitiesController < ApplicationController
   # GET /abilities
   # GET /abilities.xml

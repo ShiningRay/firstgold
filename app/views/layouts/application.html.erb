@@ -5,8 +5,8 @@
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <%= blueprint_css %>
-  <%= stylesheet_link_tag 'application', 'css/toolbar' %>
-  <%= javascript_include_tag :defaults  %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application'  %>
   <title><%= yield(:title) %></title>
   <script type="text/javascript">
     $(function(){
@@ -22,7 +22,7 @@
       </div>
       <div id="content">
         <h1><%# yield :title %></h1>
-        <% flash.each_pair do |k, v|  %>
+        <% flash.each do |k, v|  %>
           <div class="<%= k %>"><%=h v%></div>
         <% end %>
         <%= yield %></div>

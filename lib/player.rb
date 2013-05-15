@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Player
   def self.included(base)
     base.class_eval do

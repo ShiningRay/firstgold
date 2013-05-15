@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AuctionsController < ApplicationController
   # GET /auctions
   # GET /auctions.xml

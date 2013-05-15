@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module IdentityMap
   def self.included(base)
     base.extend ClassMethods

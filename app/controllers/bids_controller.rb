@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class BidsController < ApplicationController
   # GET /bids
   # GET /bids.xml

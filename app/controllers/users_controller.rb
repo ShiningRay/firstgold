@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # User controller
 class UsersController < ApplicationController
   # Protect these actions behind an admin login

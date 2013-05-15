@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ScenariosController < ApplicationController
   # GET /scenarios
   # GET /scenarios.xml

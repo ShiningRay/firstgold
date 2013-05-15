@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Stats
   def self.included(base)
     Stats::Fields.each do |f|

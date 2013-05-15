@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class InsufficientItem < StandardError
 end
 class Formula < ActiveRecord::Base

@@ -1,5 +1,4 @@
-# The frontpage controller
-# Show the http://ask.keykang.com
+# -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
   skip_before_filter :login_required
   # the homepage action

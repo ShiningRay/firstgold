@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Npc < ActiveRecord::Base
   has_many :drops
   belongs_to :scenario

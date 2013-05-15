@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Merchandise < ActiveRecord::Base
 #  belongs_to :item, :class_name => 'ItemTemplate', :foreign_key => 'item_id'
   belongs_to :item_template

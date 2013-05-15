@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateBadges < ActiveRecord::Migration
   def self.up
     create_table :badges do |t|

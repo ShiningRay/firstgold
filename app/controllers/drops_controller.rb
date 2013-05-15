@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DropsController < ApplicationController
   before_filter :find_npc
   before_filter :find_drop, :except => [:index, :new, :create]

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Mail < ActiveRecord::Base
   belongs_to :owner, :class_name => 'Character'
   belongs_to :sender, :class_name => 'Character'  

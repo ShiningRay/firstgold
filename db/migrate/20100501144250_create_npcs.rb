@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateNpcs < ActiveRecord::Migration
   def self.up
     create_table :npcs do |t|

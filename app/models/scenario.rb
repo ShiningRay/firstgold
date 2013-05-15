@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Scenario < ActiveRecord::Base
   include IdentityMap
   has_many :npcs

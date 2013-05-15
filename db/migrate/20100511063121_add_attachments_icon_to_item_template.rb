@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddAttachmentsIconToItemTemplate < ActiveRecord::Migration
   def self.up
     add_column :item_templates, :icon_file_name, :string

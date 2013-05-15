@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateItemTemplates < ActiveRecord::Migration
   def self.up
     create_table :item_templates do |t|

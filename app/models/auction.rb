@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Auction < ActiveRecord::Base
   belongs_to :seller, :class_name => 'Character'
   has_many :bids

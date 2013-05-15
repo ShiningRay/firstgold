@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateIcons < ActiveRecord::Migration
   def self.up
     create_table :icons do |t|

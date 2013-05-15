@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class GameController < ApplicationController
   before_filter :character_required
   def index

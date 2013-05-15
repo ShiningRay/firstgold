@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class InsufficientMoney < StandardError
 end
 class RequirementsNotMet < StandardError

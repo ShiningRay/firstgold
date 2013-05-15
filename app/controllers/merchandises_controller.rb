@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MerchandisesController < ApplicationController
   # GET /merchandises
   # GET /merchandises.xml

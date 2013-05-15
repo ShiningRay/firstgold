@@ -1,88 +1,131 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :formulas, :member => {:apply => :any}
-
-  map.resources :item_templates
-
-  map.resources :mails
-
-  map.resources :auctions, :has_many => :bids , :member=>{:buyout =>:post}
-
-  map.resources :npcs
-
-#  map.resources :merchandises
-
-  map.resources :shops do |shop|
-    shop.resources :merchandises, :member => {:buy => :post}
+# -*- encoding : utf-8 -*-
+Firstgold::Application.routes.draw do
+  resources :formulas do 
+    member do 
+      post :apply
+    end
   end
 
-  map.resources :scenarios, :has_many => :underlings,
-    :member => {:buy => :any, :sell => :any}
-  map.resources :npcs, :has_many => :drops, :member => {:copy => :post}
-  map.resources :badges
+  resources :item_templates
 
-  map.resources :icons
+  resources :mails
 
-  map.resources :abilities
-
-  map.resources :characters, 
-    :member => {:inc_point => :post, :dec_point => :post} do |character|
-    character.resources :items, :member => {:equip => :any, :unequip => :any, :refresh => :any}
+  resources :auctions do 
+    resources :bids do
+      member do 
+        post :buyout
+      end
+    end
   end
 
-  map.resources :users 
-  map.home     '/',         :controller => 'home',     :action => 'index'
-  map.logout   '/logout',   :controller => 'sessions', :action => 'destroy'
-  map.login    '/login',    :controller => 'sessions', :action => 'new'
-  map.register '/register', :controller => 'users',    :action => 'create'
-  map.signup   '/signup',   :controller => 'users',    :action => 'new'
-  map.myaccount'/myaccount',:controller => 'users',    :action => 'myaccount'
-  #map.live_search '/live_search', :controller => 'questions', :action => 'live_search'
-  #map.captcha '/captcha', :controller => 'users', :action => 'captcha'
-  map.resource :session
-  map.activate '/users/activate/:activation_code', :controller => 'users', :action => 'activate'
+  resources :npcs
+
+#  resources :merchandises
+
+  resources :shops do
+    resources :merchandises do
+      member do
+        post :buy
+      end
+    end
+  end
+
+  resources :scenarios do
+    resources :underlings
+    member do 
+      post :buy 
+      post :sell
+    end
+  end
+  resources :npcs do
+    resources :drops
+    member do 
+      post :copy
+    end
+  end
+  resources :badges
+
+  resources :icons
+
+  resources :abilities
+
+  resources :characters do 
+    member  do 
+      post :inc_point 
+      post :dec_point
+    end
+    resources :items do 
+      member do
+        post :equip 
+        post :unequip
+        post :refresh
+      end
+    end
+  end
+
+  resources :users 
+  match     '/'=> 'home#index', :as => 'home'
+  match   '/logout'=> 'sessions#destroy', :as => 'logout'
+  match    '/login'=> 'sessions#new', :as => 'login'
+  match '/register'=> 'users#create', :as => 'register'
+  match   '/signup'=> 'users#new', :as => 'signup'
+  match '/myaccount'=> 'users#myaccount', :as => 'myaccount'
+  #live_search '/live_search'=> 'questions#live_search'
+  #captcha '/captcha'=> 'users#captcha'
+  resource :session
+  match '/users/activate/:activation_code'=> 'users#activate', :as => 'activate'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
+  #   connect 'products/:id'=> 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
+  #   purchase 'products/:id/purchase'=> 'catalog#purchase'
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
+  #   resources :products
 
   # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
+  #   resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 
   # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+  #   resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
   
   # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
+  #   resources :products do |products|
   #     products.resources :comments
   #     products.resources :sales, :collection => { :recent => :get }
   #   end
 
   
-  map.namespace :admin do |admin|
+  namespace :admin do 
     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-    admin.resources :categories, :member => {:moveup => :get, :movedown => :get}
-    admin.resources :questions
-    admin.resources :answers
-    admin.resources :users, :collection => {:approve => :get}
-    admin.home '/', :controller => 'dashboard', :action => 'index'
+    resources :categories do
+      member do 
+        get :moveup 
+        get :movedown 
+      end
+    end
+    resources :questions
+    resources :answers
+    resources :users do 
+      collection do 
+        get :approve 
+      end
+    end
+    match '/' => 'dashboard#index'
   end
 
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
+  # You can have the root of your site routed with root -- just remember to delete public/index.html.
+  # root :controller => "welcome"
 
   # See how all your routes lay out with "rake routes"
-
+  root :to => 'home#index'
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  match ':controller/:action/:id'
+  match ':controller/:action/:id.:format'
 end

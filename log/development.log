@@ -5082,3 +5082,2951 @@ Rendering rescues/layout (not_found)
   [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
   [4;35;1mCharacter Update (0.6ms)[0m   [0mUPDATE `characters` SET `updated_at` = '2011-05-14 06:36:21', `abilities` = '--- \n- Attack\n- Healing\n', `current_hp` = 71 WHERE `id` = 1[0m
   [4;36;1mSQL (0.1ms)[0m   [0;1mCOMMIT[0m
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (17.0ms)[0m  [1mCREATE TABLE `activities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `content` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (19.0ms)[0m  CREATE TABLE `answers` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `question_id` int(11) NOT NULL, `user_id` int(11) DEFAULT 0 NOT NULL, `content` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (30.0ms)[0m  [1mCREATE INDEX `index_answers_on_question_id` ON `answers` (`question_id`)[0m
+  [1m[35m (29.0ms)[0m  CREATE INDEX `index_answers_on_user_id` ON `answers` (`user_id`)
+  [1m[36m (16.0ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) NOT NULL, `parent_id` int(11), `lft` int(11), `rgt` int(11)) ENGINE=InnoDB[0m
+  [1m[35m (28.0ms)[0m  CREATE INDEX `index_categories_on_lft_and_rgt` ON `categories` (`lft`, `rgt`)
+  [1m[36m (38.0ms)[0m  [1mCREATE INDEX `index_categories_on_name` ON `categories` (`name`)[0m
+  [1m[35m (32.0ms)[0m  CREATE INDEX `index_categories_on_parent_id` ON `categories` (`parent_id`)
+  [1m[36m (17.0ms)[0m  [1mCREATE TABLE `comments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `post_id` int(11) NOT NULL, `user_id` int(11) DEFAULT 0 NOT NULL, `content` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (29.0ms)[0m  CREATE INDEX `index_comments_on_post_id` ON `comments` (`post_id`)
+  [1m[36m (31.0ms)[0m  [1mCREATE INDEX `index_comments_on_user_id` ON `comments` (`user_id`)[0m
+  [1m[35m (17.0ms)[0m  CREATE TABLE `posts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `title` varchar(255) NOT NULL, `user_id` int(11) NOT NULL, `content` text NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (29.0ms)[0m  [1mCREATE INDEX `index_posts_on_user_id` ON `posts` (`user_id`)[0m
+  [1m[35m (17.0ms)[0m  CREATE TABLE `questions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) DEFAULT 0 NOT NULL, `title` varchar(255) NOT NULL, `content` text, `category_id` int(11) NOT NULL, `closed` tinyint(1) DEFAULT 0 NOT NULL, `anonymous` tinyint(1) DEFAULT 0 NOT NULL, `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (26.0ms)[0m  [1mCREATE INDEX `index_questions_on_anonymous` ON `questions` (`anonymous`)[0m
+  [1m[35m (28.0ms)[0m  CREATE INDEX `index_questions_on_category_id` ON `questions` (`category_id`)
+  [1m[36m (28.0ms)[0m  [1mCREATE INDEX `index_questions_on_closed` ON `questions` (`closed`)[0m
+  [1m[35m (37.0ms)[0m  CREATE INDEX `index_questions_on_private` ON `questions` (`private`)
+  [1m[36m (26.0ms)[0m  [1mCREATE INDEX `index_questions_on_user_id` ON `questions` (`user_id`)[0m
+  [1m[35m (11.0ms)[0m  CREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255)) ENGINE=InnoDB
+  [1m[36m (31.0ms)[0m  [1mCREATE UNIQUE INDEX `index_roles_on_name` ON `roles` (`name`)[0m
+  [1m[35m (14.0ms)[0m  CREATE TABLE `roles_users` (`role_id` int(11) DEFAULT 0 NOT NULL, `user_id` int(11) DEFAULT 0 NOT NULL) ENGINE=InnoDB
+  [1m[36m (34.0ms)[0m  [1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [1m[35m (24.0ms)[0m  CREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)
+  [1m[36m (17.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) NOT NULL, `name` varchar(100) DEFAULT '', `email` varchar(100) NOT NULL, `crypted_password` varchar(40) NOT NULL, `salt` varchar(40) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `remember_token` varchar(40), `remember_token_expires_at` datetime, `activation_code` varchar(40), `activated_at` datetime, `state` varchar(255) DEFAULT 'passive', `deleted_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (23.0ms)[0m  CREATE UNIQUE INDEX `index_users_on_activation_code` ON `users` (`activation_code`)
+  [1m[36m (37.0ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_email` ON `users` (`email`)[0m
+  [1m[35m (29.0ms)[0m  CREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)
+  [1m[36m (26.0ms)[0m  [1mCREATE INDEX `index_users_on_state` ON `users` (`state`)[0m
+  [1m[35m (17.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (29.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (1.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (8.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20081129151026')[0m
+  [1m[35m (7.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20081127094730')
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateUsers (20081127094730)
+Migrating to AddAvatarColumsToUser (20081211152811)
+  [1m[35m (43.0ms)[0m  ALTER TABLE `users` ADD `avatar_file_name` varchar(255)
+  [1m[36m (41.0ms)[0m  [1mALTER TABLE `users` ADD `avatar_content_type` varchar(255)[0m
+  [1m[35m (35.0ms)[0m  ALTER TABLE `users` ADD `avatar_file_size` int(11)
+  [1m[36m (7.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20081211152811')[0m
+Migrating to CreateCharacters (20090914112124)
+  [1m[35m (17.0ms)[0m  CREATE TABLE `characters` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_id` int(11), `lvl` int(11) DEFAULT 0 NOT NULL, `exp` int(11) DEFAULT 0 NOT NULL, `points` int(11) DEFAULT 0 NOT NULL, `str` int(11) DEFAULT 0 NOT NULL, `agi` int(11) DEFAULT 0 NOT NULL, `spr` int(11) DEFAULT 0 NOT NULL, `hp` int(11) DEFAULT 0 NOT NULL, `mp` int(11) DEFAULT 0 NOT NULL, `current_hp` int(11) DEFAULT 0 NOT NULL, `current_mp` int(11) DEFAULT 0 NOT NULL, `money` int(11) DEFAULT 0 NOT NULL, `abilities` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (7.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20090914112124')[0m
+Migrating to CreateItems (20090914114915)
+  [1m[35m (22.0ms)[0m  CREATE TABLE `items` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `template_id` int(11), `owner_id` int(11) NOT NULL, `quantity` int(11) DEFAULT 1 NOT NULL, `in_slot` varchar(255), `extra` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (25.0ms)[0m  [1mCREATE INDEX `item_template_id` ON `items` (`template_id`)[0m
+  [1m[35m (29.0ms)[0m  CREATE INDEX `index_items_on_owner_id_and_in_slot` ON `items` (`owner_id`, `in_slot`)
+  [1m[36m (9.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20090914114915')[0m
+Migrating to CreateIcons (20091016073635)
+  [1m[35m (25.0ms)[0m  CREATE TABLE `icons` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `icon_file_name` varchar(255), `icon_content_type` varchar(255), `icon_file_size` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (7.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20091016073635')[0m
+Migrating to CreateBadges (20091018132111)
+  [1m[35m (14.0ms)[0m  CREATE TABLE `badges` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `icon_id` int(11), `level` int(11), `description` varchar(255)) ENGINE=InnoDB
+  [1m[36m (16.0ms)[0m  [1mCREATE TABLE `badges_characters` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `badge_id` int(11), `character_id` int(11), `created_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (23.0ms)[0m  CREATE UNIQUE INDEX `index_badges_characters_on_badge_id_and_character_id` ON `badges_characters` (`badge_id`, `character_id`)
+  [1m[36m (15.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20091018132111')[0m
+Migrating to CreateScenarios (20091121014055)
+  [1m[35m (17.0ms)[0m  CREATE TABLE `scenarios` (`id` int(11) DEFAULT 0 NOT NULL, `owner_id` int(11), `name` varchar(255), `background` varchar(255), `description` text) ENGINE=InnoDB
+  [1m[36m (33.0ms)[0m  [1mALTER TABLE `scenarios` ADD PRIMARY KEY ( `id` )[0m
+  [1m[35m (30.0ms)[0m  CREATE INDEX `index_scenarios_on_owner_id` ON `scenarios` (`owner_id`)
+  [1m[36m (8.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20091121014055')[0m
+Migrating to CreateRoles (20100324080032)
+  [1m[35m (1.0ms)[0m  CREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255)) ENGINE=InnoDB
+Mysql2::Error: Table 'roles' already exists: CREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255)) ENGINE=InnoDB
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateUsers (20081127094730)
+Migrating to AddAvatarColumsToUser (20081211152811)
+Migrating to CreateCharacters (20090914112124)
+Migrating to CreateItems (20090914114915)
+Migrating to CreateIcons (20091016073635)
+Migrating to CreateBadges (20091018132111)
+Migrating to CreateScenarios (20091121014055)
+Migrating to CreateRoles (20100324080032)
+  [1m[35m (10.0ms)[0m  DROP TABLE `roles`
+  [1m[36m (16.0ms)[0m  [1mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255)) ENGINE=InnoDB[0m
+  [1m[35m (9.0ms)[0m  DROP TABLE `roles_users`
+  [1m[36m (17.0ms)[0m  [1mCREATE TABLE `roles_users` (`role_id` int(11), `user_id` int(11)) ENGINE=InnoDB[0m
+  [1m[35m (30.0ms)[0m  CREATE UNIQUE INDEX `index_roles_users_on_role_id_and_user_id` ON `roles_users` (`role_id`, `user_id`)
+  [1m[36m (10.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100324080032')[0m
+Migrating to CreateShops (20100501141028)
+  [1m[35m (12.0ms)[0m  CREATE TABLE `shops` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `npc_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (8.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100501141028')[0m
+Migrating to CreateMerchandises (20100501141801)
+  [1m[35m (18.0ms)[0m  CREATE TABLE `merchandises` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `item_template_id` int(11), `price` int(11), `limit` int(11), `limit_duration` int(11), `stock` int(11), `shop_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (8.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100501141801')[0m
+Migrating to CreateNpcs (20100501144250)
+  [1m[35m (18.0ms)[0m  CREATE TABLE `npcs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `lvl` int(11), `str` int(11), `agi` int(11), `spr` int(11), `hp` int(11), `mp` int(11), `scenario_id` int(11), `abilities` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100501144250')[0m
+Migrating to CreateAuctions (20100501154658)
+  [1m[35m (18.0ms)[0m  CREATE TABLE `auctions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `item_id` int(11) NOT NULL, `item_type` varchar(255) DEFAULT 'Item' NOT NULL, `seller_id` int(11) NOT NULL, `description` text, `upset_price` int(11) NOT NULL, `bid_increment` int(11), `status` varchar(255), `expiration` datetime NOT NULL, `bidder_id` int(11), `final_price` int(11), `buyout_price` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100501154658')[0m
+Migrating to CreateBids (20100501154752)
+  [1m[35m (18.0ms)[0m  CREATE TABLE `bids` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `auction_id` int(11), `bid_price` int(11), `bidder_id` int(11), `status` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (8.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100501154752')[0m
+Migrating to CreateMails (20100501155250)
+  [1m[35m (25.0ms)[0m  CREATE TABLE `mails` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `owner_id` int(11), `sender_id` int(11), `recipient_id` int(11), `content` text, `read` tinyint(1), `attachment` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (25.0ms)[0m  [1mCREATE INDEX `owner_id` ON `mails` (`owner_id`, `sender_id`, `read`)[0m
+  [1m[35m (8.0ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20100501155250')
+Migrating to CreateItemTemplates (20100502030641)
+  [1m[36m (17.0ms)[0m  [1mCREATE TABLE `item_templates` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `price` int(11), `slot` varchar(255), `max_stack` int(11), `extra` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20100502030641')
+Migrating to CreateDrops (20100502045231)
+  [1m[36m (17.0ms)[0m  [1mCREATE TABLE `drops` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `npc_id` int(11) NOT NULL, `item_template_id` int(11) NOT NULL, `quantity` int(11) DEFAULT 1 NOT NULL, `chance` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (31.0ms)[0m  CREATE INDEX `index_drops_on_npc_id_and_item_template_id` ON `drops` (`npc_id`, `item_template_id`)
+  [1m[36m (7.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100502045231')[0m
+Migrating to AddAttachmentsBackgroundToScenarios (20100503074055)
+  [1m[35m (1.0ms)[0m  SHOW COLUMNS FROM `scenarios` LIKE 'background'
+  [1m[36m (36.0ms)[0m  [1mALTER TABLE `scenarios` CHANGE `background` `background_file_name` varchar(255) DEFAULT NULL[0m
+  [1m[35m (43.0ms)[0m  ALTER TABLE `scenarios` ADD `background_content_type` varchar(255)
+  [1m[36m (37.0ms)[0m  [1mALTER TABLE `scenarios` ADD `background_file_size` int(11)[0m
+  [1m[35m (38.0ms)[0m  ALTER TABLE `scenarios` ADD `background_updated_at` datetime
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100503074055')[0m
+Migrating to AddAttachmentsIconToItemTemplate (20100511063121)
+  [1m[35m (38.0ms)[0m  ALTER TABLE `item_templates` ADD `icon_file_name` varchar(255)
+  [1m[36m (43.0ms)[0m  [1mALTER TABLE `item_templates` ADD `icon_content_type` varchar(255)[0m
+  [1m[35m (41.0ms)[0m  ALTER TABLE `item_templates` ADD `icon_file_size` int(11)
+  [1m[36m (40.0ms)[0m  [1mALTER TABLE `item_templates` ADD `icon_updated_at` datetime[0m
+  [1m[35m (8.0ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20100511063121')
+Migrating to CreateFormulas (20100511105903)
+  [1m[36m (17.0ms)[0m  [1mCREATE TABLE `formulas` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `input` text, `output` text) ENGINE=InnoDB[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20100511105903')
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2013-05-15 11:13:36 +0800
+Served asset /rails.png - 200 OK (9ms)
+
+
+Started GET "/game" for 127.0.0.1 at 2013-05-15 11:13:40 +0800
+
+ActionController::RoutingError (No route matches [GET] "/game"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (3.0ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2013-05-15 11:14:05 +0800
+
+ActionController::RoutingError (No route matches [GET] "/home"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2013-05-15 11:14:08 +0800
+
+ActionController::RoutingError (No route matches [GET] "/home"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/languages/Ruby193/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/home" for 127.0.0.1 at 2013-05-15 11:16:02 +0800
+
+ActionController::RoutingError (No route matches [GET] "/home"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:16:20 +0800
+
+ActionController::RoutingError (uninitialized constant ApplicationController::AuthenticatedSystem):
+  app/controllers/application_controller.rb:11:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:16:21 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:16:22 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:16:22 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:16:23 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:05 +0800
+
+ActionController::RoutingError (uninitialized constant ApplicationController::AuthenticatedSystem):
+  app/controllers/application_controller.rb:11:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:25 +0800
+
+ActionController::RoutingError (uninitialized constant ApplicationController::AuthenticatedSystem):
+  app/controllers/application_controller.rb:11:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:26 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:26 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:27 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:27 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:27 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:27 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:28 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:28 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:28 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:28 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:29 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:30 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:30 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:30 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:17:58 +0800
+
+ActionController::RoutingError (uninitialized constant ApplicationController::AuthenticatedSystem):
+  app/controllers/application_controller.rb:11:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:18:00 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:18:00 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:19:22 +0800
+
+ActionController::RoutingError (uninitialized constant ApplicationController::AuthenticatedSystem):
+  app/controllers/application_controller.rb:11:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:00 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:01 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:01 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:01 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:01 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:02 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:02 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:3:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:57 +0800
+
+ActionController::RoutingError (uninitialized constant ApplicationController::AuthenticatedSystem):
+  app/controllers/application_controller.rb:11:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:58 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:59 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:59 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:59 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:20:59 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:23:43 +0800
+
+ActionController::RoutingError (undefined method `class_inheritable_array' for ApplicationController:Class):
+  lib/role_requirement_system.rb:7:in `included'
+  app/controllers/application_controller.rb:12:in `include'
+  app/controllers/application_controller.rb:12:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:02 +0800
+
+ActionController::RoutingError (undefined method `class_inheritable_array' for ApplicationController:Class):
+  lib/role_requirement_system.rb:7:in `included'
+  app/controllers/application_controller.rb:12:in `include'
+  app/controllers/application_controller.rb:12:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:03 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:03 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:03 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:04 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:04 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:04 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:07 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:08 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:08 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:24:09 +0800
+
+ActionController::RoutingError (uninitialized constant Admin::DashboardHelper):
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:25:23 +0800
+
+ActionController::RoutingError (undefined method `class_inheritable_array' for ApplicationController:Class):
+  lib/role_requirement_system.rb:7:in `included'
+  app/controllers/application_controller.rb:12:in `include'
+  app/controllers/application_controller.rb:12:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:4:in `<top (required)>'
+  app/controllers/home_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:27:10 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (0.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (22.0ms)
+Completed 500 Internal Server Error in 98ms
+
+ActionView::Template::Error (can not load translations from D:/projects/GitHub/firstgold/config/locales/cz.yml, expected it to return a hash, but does not):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__173012170_37621980'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:28:49 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (0.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (6.0ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (can not load translations from D:/projects/GitHub/firstgold/config/locales/cz.yml, expected it to return a hash, but does not):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__173012170_37621980'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:29:51 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (0.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (22.0ms)
+Completed 500 Internal Server Error in 98ms
+
+ActionView::Template::Error (can not load translations from D:/projects/GitHub/firstgold/config/locales/cz.yml, expected it to return a hash, but does not):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__427314426_37740156'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:29:53 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (11.0ms)
+Completed 500 Internal Server Error in 16ms
+
+ActionView::Template::Error (can not load translations from D:/projects/GitHub/firstgold/config/locales/cz.yml, expected it to return a hash, but does not):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__427314426_37740156'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (12.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:30:18 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (1.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (9.0ms)
+Completed 500 Internal Server Error in 15ms
+
+ActionView::Template::Error (No such file or directory - D:/projects/GitHub/firstgold/config/locales/cz.yml):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__427314426_37740156'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:30:18 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (3.0ms)
+Completed 500 Internal Server Error in 6ms
+
+ActionView::Template::Error (No such file or directory - D:/projects/GitHub/firstgold/config/locales/cz.yml):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__427314426_37740156'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:30:19 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (1.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (9.0ms)
+Completed 500 Internal Server Error in 16ms
+
+ActionView::Template::Error (No such file or directory - D:/projects/GitHub/firstgold/config/locales/cz.yml):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__427314426_37740156'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:30:19 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (1.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (9.0ms)
+Completed 500 Internal Server Error in 15ms
+
+ActionView::Template::Error (No such file or directory - D:/projects/GitHub/firstgold/config/locales/cz.yml):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__427314426_37740156'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:31:33 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (0.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (11.0ms)
+Completed 500 Internal Server Error in 90ms
+
+ActionView::Template::Error (can not load translations from D:/projects/GitHub/firstgold/config/locales/zh.yml, expected it to return a hash, but does not):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__893530231_38509944'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:32:48 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (0.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 49ms
+
+ActionView::Template::Error (can not load translations from D:/projects/GitHub/firstgold/config/locales/zh.yml, expected it to return a hash, but does not):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__893530231_38509944'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:32:57 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (5.0ms)
+Completed 500 Internal Server Error in 37ms
+
+ActionView::Template::Error (can not load translations from D:/projects/GitHub/firstgold/config/locales/zh.yml, expected it to return a hash, but does not):
+    1: <% title t("Home") %>
+    2: 
+    3: <h3>Management Section</h3>
+    4: <ul>
+  app/views/home/index.html.erb:1:in `_app_views_home_index_html_erb__893530231_38509944'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:34:34 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (9.0ms)
+Compiled application.css  (1ms)  (pid 6468)
+  Rendered users/_user_bar.html.erb (1.0ms)
+  Rendered common/_header.html.erb (2.0ms)
+Completed 500 Internal Server Error in 89ms
+
+ActionView::Template::Error (undefined method `each_pair' for #<ActionDispatch::Flash::FlashHash:0x49afa00>):
+    22:       </div>
+    23:       <div id="content">
+    24:         <h1><%# yield :title %></h1>
+    25:         <% flash.each_pair do |k, v|  %>
+    26:           <div class="<%= k %>"><%=h v%></div>
+    27:         <% end %>
+    28:         <%= yield %></div>
+  app/views/layouts/application.html.erb:25:in `_app_views_layouts_application_html_erb__694866039_38522052'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:35:11 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+  Rendered users/_user_bar.html.erb (1.0ms)
+  Rendered common/_header.html.erb (2.0ms)
+  Rendered common/_footer.html.erb (0.0ms)
+Completed 200 OK in 32ms (Views: 30.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/screen.css" for 127.0.0.1 at 2013-05-15 11:35:12 +0800
+Served asset /screen.css - 404 Not Found (5ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/screen.css"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/assets/ie.css" for 127.0.0.1 at 2013-05-15 11:35:12 +0800
+Served asset /ie.css - 404 Not Found (3ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/ie.css"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-05-15 11:35:12 +0800
+Served asset /application.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/toolbar.css" for 127.0.0.1 at 2013-05-15 11:35:12 +0800
+Served asset /css/toolbar.css - 404 Not Found (2ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/css/toolbar.css"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/assets/defaults.js" for 127.0.0.1 at 2013-05-15 11:35:12 +0800
+Served asset /defaults.js - 404 Not Found (15ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/defaults.js"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/assets/print.css" for 127.0.0.1 at 2013-05-15 11:35:12 +0800
+Served asset /print.css - 404 Not Found (3ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/print.css"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:35:58 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (0.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (2.0ms)
+Compiled application.css  (0ms)  (pid 6468)
+  Rendered users/_user_bar.html.erb (1.0ms)
+  Rendered common/_header.html.erb (2.0ms)
+  Rendered common/_footer.html.erb (0.0ms)
+Completed 200 OK in 86ms (Views: 83.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/css/toolbar.css" for 127.0.0.1 at 2013-05-15 11:35:58 +0800
+Served asset /css/toolbar.css - 404 Not Found (3ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/css/toolbar.css"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-05-15 11:35:58 +0800
+Served asset /application.css - 200 OK (2ms)
+
+
+Started GET "/assets/ie.css" for 127.0.0.1 at 2013-05-15 11:35:58 +0800
+Served asset /ie.css - 404 Not Found (14ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/ie.css"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/assets/screen.css" for 127.0.0.1 at 2013-05-15 11:35:58 +0800
+Served asset /screen.css - 404 Not Found (3ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/screen.css"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/assets/defaults.js" for 127.0.0.1 at 2013-05-15 11:35:58 +0800
+Served asset /defaults.js - 404 Not Found (2ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/defaults.js"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/assets/print.css" for 127.0.0.1 at 2013-05-15 11:35:58 +0800
+Served asset /print.css - 404 Not Found (2ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/print.css"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.0) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.0) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.0) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.0) lib/thin/connection.rb:54:in `process'
+  thin (1.5.0) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine-1.0.3-x86 (mingw32) lib/eventmachine.rb:187:in `run'
+  thin (1.5.0) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.0) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.13) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.13) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.13) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.13) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (1.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+Compiled screen.css  (0ms)  (pid 6468)
+Compiled print.css  (0ms)  (pid 6468)
+Compiled ie.css  (0ms)  (pid 6468)
+Compiled css/autocomplete.css  (0ms)  (pid 6468)
+Compiled css/bubble.css  (1ms)  (pid 6468)
+Compiled css/button.css  (0ms)  (pid 6468)
+Compiled css/charpicker.css  (0ms)  (pid 6468)
+Compiled css/checkbox.css  (0ms)  (pid 6468)
+Compiled css/colormenubutton.css  (0ms)  (pid 6468)
+Compiled css/colorpicker-simplegrid.css  (0ms)  (pid 6468)
+Compiled css/combobox.css  (0ms)  (pid 6468)
+Compiled css/common.css  (0ms)  (pid 6468)
+Compiled css/datepicker.css  (0ms)  (pid 6468)
+Compiled css/demo.css  (0ms)  (pid 6468)
+Compiled css/dialog.css  (0ms)  (pid 6468)
+Compiled css/dimensionpicker.css  (1ms)  (pid 6468)
+Compiled css/hovercard.css  (0ms)  (pid 6468)
+Compiled css/hsvapalette.css  (0ms)  (pid 6468)
+Compiled css/hsvpalette.css  (0ms)  (pid 6468)
+Compiled css/imagelessbutton.css  (0ms)  (pid 6468)
+Compiled css/inputdatepicker.css  (0ms)  (pid 6468)
+Compiled css/menubutton.css  (0ms)  (pid 6468)
+Compiled css/menus.css  (0ms)  (pid 6468)
+Compiled css/multitestrunner.css  (0ms)  (pid 6468)
+Compiled css/offline.css  (0ms)  (pid 6468)
+Compiled css/palette.css  (0ms)  (pid 6468)
+Compiled css/popupdatepicker.css  (1ms)  (pid 6468)
+Compiled css/roundedtab.css  (0ms)  (pid 6468)
+Compiled css/tab.css  (0ms)  (pid 6468)
+Compiled css/tabbar.css  (0ms)  (pid 6468)
+Compiled css/tablesorter.css  (0ms)  (pid 6468)
+Compiled css/toolbar.css  (0ms)  (pid 6468)
+Compiled scaffold.css  (0ms)  (pid 6468)
+Compiled application.css  (267ms)  (pid 6468)
+Compiled jquery.js  (0ms)  (pid 6468)
+Compiled jquery_ujs.js  (0ms)  (pid 6468)
+Compiled actions.js  (0ms)  (pid 6468)
+Compiled controls.js  (0ms)  (pid 6468)
+Compiled dragdrop.js  (0ms)  (pid 6468)
+Compiled effects.js  (0ms)  (pid 6468)
+Compiled ejs.js  (0ms)  (pid 6468)
+Compiled ejs_production.js  (0ms)  (pid 6468)
+Compiled jquery-ui.js  (2ms)  (pid 6468)
+Compiled jquery.json-1.3.js  (0ms)  (pid 6468)
+Compiled js/class.js  (0ms)  (pid 6468)
+Compiled js/command.js  (0ms)  (pid 6468)
+Compiled js/comparable.js  (0ms)  (pid 6468)
+Compiled js/decorator.js  (0ms)  (pid 6468)
+Compiled js/enumerable.js  (1ms)  (pid 6468)
+Compiled js/forwardable.js  (0ms)  (pid 6468)
+Compiled js/linked_list.js  (0ms)  (pid 6468)
+Compiled js/method_chain.js  (0ms)  (pid 6468)
+Compiled js/observable.js  (0ms)  (pid 6468)
+Compiled js/package.js  (0ms)  (pid 6468)
+Compiled js/proxy.js  (0ms)  (pid 6468)
+Compiled js/ruby.js  (0ms)  (pid 6468)
+Compiled js/set.js  (0ms)  (pid 6468)
+Compiled js/stack_trace.js  (0ms)  (pid 6468)
+Compiled js/state.js  (0ms)  (pid 6468)
+Compiled socket.js  (0ms)  (pid 6468)
+Compiled swfobject.js  (0ms)  (pid 6468)
+Compiled view.js  (0ms)  (pid 6468)
+Compiled application.js  (245ms)  (pid 6468)
+  Rendered users/_user_bar.html.erb (0.0ms)
+  Rendered common/_header.html.erb (1.0ms)
+  Rendered common/_footer.html.erb (0.0ms)
+Completed 200 OK in 601ms (Views: 600.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/screen.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /screen.css - 200 OK (2ms)
+
+
+Started GET "/assets/ie.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /ie.css - 200 OK (2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /application.css - 304 Not Modified (18ms)
+
+
+Started GET "/assets/css/autocomplete.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /css/autocomplete.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/bubble.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /css/bubble.css - 200 OK (1ms)
+
+
+Started GET "/assets/css/button.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /css/button.css - 200 OK (2ms)
+
+
+Started GET "/assets/css/charpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /css/charpicker.css - 200 OK (2ms)
+
+
+Started GET "/assets/css/checkbox.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /css/checkbox.css - 200 OK (1ms)
+
+
+Started GET "/assets/css/colormenubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /css/colormenubutton.css - 200 OK (2ms)
+
+
+Started GET "/assets/css/common.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /css/common.css - 200 OK (2ms)
+
+
+Started GET "/assets/css/datepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:28 +0800
+Served asset /css/datepicker.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/colorpicker-simplegrid.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/colorpicker-simplegrid.css - 200 OK (1ms)
+
+
+Started GET "/assets/css/combobox.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/combobox.css - 200 OK (2ms)
+
+
+Started GET "/assets/css/demo.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/demo.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/dialog.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/dialog.css - 200 OK (13ms)
+
+
+Started GET "/assets/css/dimensionpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/dimensionpicker.css - 200 OK (1ms)
+
+
+Started GET "/assets/css/hovercard.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/hovercard.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/hsvapalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/hsvapalette.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/hsvpalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/hsvpalette.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/imagelessbutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/imagelessbutton.css - 200 OK (2ms)
+
+
+Started GET "/assets/css/inputdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/inputdatepicker.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/menubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/menubutton.css - 200 OK (1ms)
+
+
+Started GET "/assets/css/multitestrunner.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/multitestrunner.css - 200 OK (1ms)
+
+
+Started GET "/assets/css/menus.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/menus.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/palette.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/palette.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/offline.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/offline.css - 200 OK (1ms)
+
+
+Started GET "/assets/css/popupdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/popupdatepicker.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/roundedtab.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/roundedtab.css - 200 OK (1ms)
+
+
+Started GET "/assets/css/tab.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/tab.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/tablesorter.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/tablesorter.css - 200 OK (2ms)
+
+
+Started GET "/assets/css/tabbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/tabbar.css - 200 OK (0ms)
+
+
+Started GET "/assets/css/toolbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/toolbar.css - 200 OK (0ms)
+
+
+Started GET "/assets/scaffold.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /scaffold.css - 200 OK (1ms)
+
+
+Started GET "/assets/controls.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /controls.js - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /jquery.js - 200 OK (1ms)
+
+
+Started GET "/assets/actions.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /actions.js - 200 OK (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /jquery_ujs.js - 200 OK (2ms)
+
+
+Started GET "/assets/effects.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /effects.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /jquery-ui.js - 200 OK (1ms)
+
+
+Started GET "/assets/ejs.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /ejs.js - 200 OK (13ms)
+
+
+Started GET "/assets/ejs_production.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /ejs_production.js - 200 OK (1ms)
+
+
+Started GET "/assets/dragdrop.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /dragdrop.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery.json-1.3.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /jquery.json-1.3.js - 200 OK (2ms)
+
+
+Started GET "/assets/js/class.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/class.js - 200 OK (1ms)
+
+
+Started GET "/assets/js/enumerable.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/enumerable.js - 200 OK (0ms)
+
+
+Started GET "/assets/js/command.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/command.js - 200 OK (1ms)
+
+
+Started GET "/assets/js/comparable.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/comparable.js - 200 OK (0ms)
+
+
+Started GET "/assets/js/decorator.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/decorator.js - 200 OK (0ms)
+
+
+Started GET "/assets/js/forwardable.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/forwardable.js - 200 OK (0ms)
+
+
+Started GET "/assets/js/linked_list.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/linked_list.js - 200 OK (0ms)
+
+
+Started GET "/assets/js/method_chain.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/method_chain.js - 200 OK (1ms)
+
+
+Started GET "/assets/js/observable.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/observable.js - 200 OK (1ms)
+
+
+Started GET "/assets/js/package.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/package.js - 200 OK (0ms)
+
+
+Started GET "/assets/js/proxy.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/proxy.js - 200 OK (1ms)
+
+
+Started GET "/assets/js/stack_trace.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/stack_trace.js - 200 OK (2ms)
+
+
+Started GET "/assets/js/ruby.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/ruby.js - 200 OK (13ms)
+
+
+Started GET "/assets/socket.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /socket.js - 200 OK (0ms)
+
+
+Started GET "/assets/js/set.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/set.js - 200 OK (1ms)
+
+
+Started GET "/assets/js/state.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /js/state.js - 200 OK (1ms)
+
+
+Started GET "/assets/swfobject.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /swfobject.js - 200 OK (0ms)
+
+
+Started GET "/assets/view.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /view.js - 200 OK (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /application.js - 200 OK (16ms)
+
+
+Started GET "/assets/css/common.css" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/common.css - 200 OK (19ms)
+
+
+Started GET "/assets/css/palette.css" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/palette.css - 200 OK (5ms)
+
+
+Started GET "/assets/css/menubutton.css" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/menubutton.css - 200 OK (4ms)
+
+
+Started GET "/assets/css/toolbar.css" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/toolbar.css - 200 OK (5ms)
+
+
+Started GET "/assets/css/dialog.css" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/dialog.css - 200 OK (6ms)
+
+
+Started GET "/assets/css/popupdatepicker.css" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/popupdatepicker.css - 200 OK (4ms)
+
+
+Started GET "/assets/css/menus.css" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/menus.css - 200 OK (5ms)
+
+
+Started GET "/assets/css/datepicker.css" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /css/datepicker.css - 200 OK (19ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2013-05-15 11:40:29 +0800
+Served asset /print.css - 200 OK (2ms)
+
+
+Started GET "/abilities" for 127.0.0.1 at 2013-05-15 11:40:43 +0800
+
+SyntaxError (D:/projects/GitHub/firstgold/app/models/ability.rb:66: invalid multibyte char (US-ASCII)
+D:/projects/GitHub/firstgold/app/models/ability.rb:66: invalid multibyte char (US-ASCII)
+D:/projects/GitHub/firstgold/app/models/ability.rb:66: syntax error, unexpected $end, expecting keyword_end
+    raise GameWarning, "你已经死亡！" if me.dead?
+                          ^):
+  app/controllers/abilities_controller.rb:1:in `<top (required)>'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-15 11:41:34 +0800
+Processing by HomeController#index as HTML
+  [1m[36mScenario Load (0.0ms)[0m  [1mSELECT `scenarios`.* FROM `scenarios` ORDER BY id asc[0m
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` ORDER BY created_at DESC LIMIT 5
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+  Rendered users/_user_bar.html.erb (0.0ms)
+  Rendered common/_header.html.erb (1.0ms)
+  Rendered common/_footer.html.erb (0.0ms)
+Completed 200 OK in 56ms (Views: 26.0ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/assets/screen.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ie.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /ie.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/autocomplete.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/autocomplete.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/bubble.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/bubble.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/button.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/button.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/charpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/charpicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/checkbox.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/checkbox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/colormenubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/colormenubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/colorpicker-simplegrid.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/colorpicker-simplegrid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/combobox.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/combobox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/common.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/datepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/datepicker.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/css/demo.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/demo.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dialog.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/dialog.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dimensionpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/dimensionpicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hovercard.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/hovercard.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hsvapalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:49 +0800
+Served asset /css/hsvapalette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hsvpalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/hsvpalette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/imagelessbutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/imagelessbutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/inputdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/inputdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/menubutton.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/css/menus.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/menus.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/multitestrunner.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/multitestrunner.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/offline.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/offline.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/palette.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/palette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/popupdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/popupdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/roundedtab.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/roundedtab.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tab.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/tab.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tabbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:50 +0800
+Served asset /css/tabbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tablesorter.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/tablesorter.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/toolbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/toolbar.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/scaffold.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /scaffold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/common.css" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menubutton.css" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/menubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/palette.css" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/palette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/toolbar.css" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/toolbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/popupdatepicker.css" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/popupdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menus.css" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/menus.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dialog.css" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/dialog.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/datepicker.css" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /css/datepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2013-05-15 11:42:51 +0800
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/abilities" for 127.0.0.1 at 2013-05-15 11:42:53 +0800
+Processing by AbilitiesController#index as HTML
+Completed 500 Internal Server Error in 2ms
+
+NoMethodError (undefined method `request_uri' for #<ActionDispatch::Request:0x4938678>):
+  lib/authenticated_system.rb:85:in `store_location'
+  lib/authenticated_system.rb:68:in `block (2 levels) in access_denied'
+  lib/authenticated_system.rb:66:in `access_denied'
+  lib/role_requirement_system.rb:121:in `access_denied'
+  lib/authenticated_system.rb:54:in `login_required'
+
+
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/languages/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.0ms)
+
+
+Started GET "/abilities" for 127.0.0.1 at 2013-05-15 11:43:13 +0800
+Processing by AbilitiesController#index as HTML
+Redirected to http://localhost:3000/session/new
+Filter chain halted as :login_required rendered or redirected
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/session/new" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (3.0ms)
+  Rendered users/_user_bar.html.erb (1.0ms)
+  Rendered common/_header.html.erb (1.0ms)
+  Rendered common/_footer.html.erb (0.0ms)
+Completed 200 OK in 23ms (Views: 23.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/screen.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ie.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /ie.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/autocomplete.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/autocomplete.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/bubble.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/bubble.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/button.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/button.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/charpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/charpicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/checkbox.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/checkbox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/colormenubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/colormenubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/colorpicker-simplegrid.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/colorpicker-simplegrid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/combobox.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/combobox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/common.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/datepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/datepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/demo.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/demo.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dialog.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/dialog.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dimensionpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:14 +0800
+Served asset /css/dimensionpicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hovercard.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/hovercard.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hsvapalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/hsvapalette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hsvpalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/hsvpalette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/imagelessbutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/imagelessbutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/inputdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/inputdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/menubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menus.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/menus.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/multitestrunner.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/multitestrunner.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/offline.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/offline.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/palette.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/palette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/popupdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/popupdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/roundedtab.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/roundedtab.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tab.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/tab.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tabbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/tabbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tablesorter.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/tablesorter.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/toolbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /css/toolbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffold.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /scaffold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:15 +0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/actions.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /actions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/controls.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /controls.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dragdrop.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /dragdrop.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/effects.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /effects.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ejs.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /ejs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ejs_production.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /ejs_production.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /jquery-ui.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.json-1.3.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /jquery.json-1.3.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/class.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/class.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/command.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/command.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/comparable.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/comparable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/decorator.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/decorator.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/enumerable.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/enumerable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/forwardable.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/forwardable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/linked_list.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/linked_list.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/method_chain.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/method_chain.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/observable.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:16 +0800
+Served asset /js/observable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/package.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /js/package.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/proxy.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /js/proxy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/ruby.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /js/ruby.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/set.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /js/set.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/stack_trace.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /js/stack_trace.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/state.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /js/state.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/socket.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /socket.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/swfobject.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /swfobject.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/view.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /view.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/common.css" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /css/common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menubutton.css" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /css/menubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/palette.css" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /css/palette.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/css/toolbar.css" for 127.0.0.1 at 2013-05-15 11:43:17 +0800
+Served asset /css/toolbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/popupdatepicker.css" for 127.0.0.1 at 2013-05-15 11:43:18 +0800
+Served asset /css/popupdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menus.css" for 127.0.0.1 at 2013-05-15 11:43:18 +0800
+Served asset /css/menus.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dialog.css" for 127.0.0.1 at 2013-05-15 11:43:18 +0800
+Served asset /css/dialog.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/datepicker.css" for 127.0.0.1 at 2013-05-15 11:43:18 +0800
+Served asset /css/datepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:18 +0800
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/session/new" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (3.0ms)
+  Rendered users/_user_bar.html.erb (1.0ms)
+  Rendered common/_header.html.erb (2.0ms)
+  Rendered common/_footer.html.erb (0.0ms)
+Completed 200 OK in 29ms (Views: 29.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/screen.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ie.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /ie.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/autocomplete.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/autocomplete.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/bubble.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/bubble.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/button.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/button.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/charpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/charpicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/checkbox.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/checkbox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/colormenubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/colormenubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/colorpicker-simplegrid.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/colorpicker-simplegrid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/combobox.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/combobox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/common.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:45 +0800
+Served asset /css/common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/datepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/datepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/demo.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/demo.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dialog.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/dialog.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dimensionpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/dimensionpicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hovercard.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/hovercard.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hsvapalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/hsvapalette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hsvpalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/hsvpalette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/imagelessbutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/imagelessbutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/inputdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/inputdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/menubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menus.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/menus.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/multitestrunner.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/multitestrunner.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/offline.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/offline.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/palette.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/palette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/popupdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/popupdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/roundedtab.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/roundedtab.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tab.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/tab.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tabbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:46 +0800
+Served asset /css/tabbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tablesorter.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /css/tablesorter.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/toolbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /css/toolbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffold.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /scaffold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /jquery_ujs.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/actions.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /actions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/controls.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /controls.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dragdrop.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /dragdrop.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/effects.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /effects.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ejs.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /ejs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ejs_production.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /ejs_production.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /jquery-ui.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.json-1.3.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /jquery.json-1.3.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/class.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /js/class.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/command.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /js/command.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/comparable.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /js/comparable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/decorator.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /js/decorator.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/enumerable.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:47 +0800
+Served asset /js/enumerable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/forwardable.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/forwardable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/linked_list.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/linked_list.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/method_chain.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/method_chain.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/observable.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/observable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/package.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/package.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/proxy.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/proxy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/ruby.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/ruby.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/set.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/set.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/stack_trace.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/stack_trace.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/state.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /js/state.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/socket.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /socket.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/swfobject.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /swfobject.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/view.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /view.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/common.css" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /css/common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menubutton.css" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /css/menubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/palette.css" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /css/palette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/toolbar.css" for 127.0.0.1 at 2013-05-15 11:43:48 +0800
+Served asset /css/toolbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/popupdatepicker.css" for 127.0.0.1 at 2013-05-15 11:43:49 +0800
+Served asset /css/popupdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menus.css" for 127.0.0.1 at 2013-05-15 11:43:49 +0800
+Served asset /css/menus.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dialog.css" for 127.0.0.1 at 2013-05-15 11:43:49 +0800
+Served asset /css/dialog.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/datepicker.css" for 127.0.0.1 at 2013-05-15 11:43:49 +0800
+Served asset /css/datepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2013-05-15 11:43:49 +0800
+Served asset /print.css - 304 Not Modified (0ms)
+
+
+Started GET "/session/new" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (2.0ms)
+  Rendered users/_user_bar.html.erb (0.0ms)
+  Rendered common/_header.html.erb (1.0ms)
+  Rendered common/_footer.html.erb (0.0ms)
+Completed 200 OK in 19ms (Views: 19.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/screen.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /screen.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ie.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /ie.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/autocomplete.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/autocomplete.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/bubble.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/bubble.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/button.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/button.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/charpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/charpicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/checkbox.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/checkbox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/colormenubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/colormenubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/colorpicker-simplegrid.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/colorpicker-simplegrid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/combobox.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/combobox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/common.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/datepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/datepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/demo.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/demo.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dialog.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/dialog.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dimensionpicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/dimensionpicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hovercard.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:20 +0800
+Served asset /css/hovercard.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hsvapalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/hsvapalette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/hsvpalette.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/hsvpalette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/imagelessbutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/imagelessbutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/inputdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/inputdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menubutton.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/menubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menus.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/menus.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/multitestrunner.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/multitestrunner.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/offline.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/offline.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/palette.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/palette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/popupdatepicker.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/popupdatepicker.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/css/roundedtab.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/roundedtab.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tab.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/tab.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tabbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/tabbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/tablesorter.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/tablesorter.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/toolbar.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /css/toolbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffold.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /scaffold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:21 +0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/actions.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /actions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/controls.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /controls.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dragdrop.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /dragdrop.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/effects.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /effects.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ejs.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /ejs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ejs_production.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /ejs_production.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /jquery-ui.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.json-1.3.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /jquery.json-1.3.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/class.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /js/class.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/command.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /js/command.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/comparable.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /js/comparable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/decorator.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /js/decorator.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/enumerable.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /js/enumerable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/forwardable.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /js/forwardable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/linked_list.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /js/linked_list.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/method_chain.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:22 +0800
+Served asset /js/method_chain.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/observable.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /js/observable.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/package.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /js/package.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/proxy.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /js/proxy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/ruby.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /js/ruby.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/set.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /js/set.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/stack_trace.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /js/stack_trace.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/state.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /js/state.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/socket.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /socket.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/swfobject.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /swfobject.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/view.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /view.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/common.css" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /css/common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menubutton.css" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /css/menubutton.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/palette.css" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /css/palette.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/toolbar.css" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /css/toolbar.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/popupdatepicker.css" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /css/popupdatepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/menus.css" for 127.0.0.1 at 2013-05-15 11:44:23 +0800
+Served asset /css/menus.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/dialog.css" for 127.0.0.1 at 2013-05-15 11:44:24 +0800
+Served asset /css/dialog.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/css/datepicker.css" for 127.0.0.1 at 2013-05-15 11:44:24 +0800
+Served asset /css/datepicker.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/print.css?body=1" for 127.0.0.1 at 2013-05-15 11:44:24 +0800
+Served asset /print.css - 304 Not Modified (0ms)

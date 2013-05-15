@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class IconsController < ApplicationController
   # GET /icons
   # GET /icons.xml

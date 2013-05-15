@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CharactersController < ApplicationController
   before_filter :find_character, :except => [:index, :new, :create]
   # GET /characters

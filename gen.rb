@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 StatsFields=[:str, :agi, :spr, :int, :ac, :dmg1, :dmg2, :hp, :mp, :hr, :dr]
 puts 'module StatsCalculations'
 StatsFields.each do |n|

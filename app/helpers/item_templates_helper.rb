@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ItemTemplatesHelper
   def extra_text_field obj, fields
     

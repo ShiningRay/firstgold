@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Admin::BaseController < ApplicationController
   #TODO: protect admin panels with checking admin privileges
   require_role 'admin'

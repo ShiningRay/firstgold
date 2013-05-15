@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ExtraField
   def self.included(base)
     base.serialize :extra

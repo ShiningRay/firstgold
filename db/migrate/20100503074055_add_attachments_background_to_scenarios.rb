@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddAttachmentsBackgroundToScenarios < ActiveRecord::Migration
   def self.up
     rename_column :scenarios, :background, :background_file_name

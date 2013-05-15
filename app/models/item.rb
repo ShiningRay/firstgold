@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   belongs_to :template, :class_name => 'ItemTemplate'
   belongs_to :owner, :class_name => 'Character', :foreign_key => 'owner_id'

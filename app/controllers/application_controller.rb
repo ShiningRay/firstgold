@@ -1,7 +1,9 @@
+# -*- encoding : utf-8 -*-
 # Base Controller for all our controllers
 # here handle some common logics
 # pay attention to that only the frontpage is open for anonymous users
 class ApplicationController < ActionController::Base
+  protect_from_forgery
   # AuthenticatedSystem must be included for RoleRequirement, and is provided by
   # installing acts_as_authenticates and running 'script/generate authenticated
   # account user'.
@@ -19,7 +21,6 @@ class ApplicationController < ActionController::Base
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
-  filter_parameter_logging :password
 
   before_filter :login_required
 protected

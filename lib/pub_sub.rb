@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Topic-based publish/subscribe channel implementation.
 
 

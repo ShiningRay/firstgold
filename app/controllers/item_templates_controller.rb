@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ItemTemplatesController < ApplicationController
   # GET /item_templates
   # GET /item_templates.xml

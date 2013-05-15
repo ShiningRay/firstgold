@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # ItemTemplate is the meta-data for items
 Properties = {
   1 => {:str => 10},

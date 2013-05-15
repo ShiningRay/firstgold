@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateAuctions < ActiveRecord::Migration
   def self.up
     create_table :auctions do |t|

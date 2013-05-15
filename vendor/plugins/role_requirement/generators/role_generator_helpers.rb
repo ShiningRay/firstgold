@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module RoleGeneratorHelpers
   def insert_content_after(filename, regexp, content_for_insertion, options = {})
     return false unless File.exist?(filename)

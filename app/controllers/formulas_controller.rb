@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FormulasController < ApplicationController
   # GET /formulas
   # GET /formulas.xml
