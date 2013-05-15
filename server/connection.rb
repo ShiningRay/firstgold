@@ -181,8 +181,9 @@ Npc.class_eval do
   include Player
 end
 EM.run { 
+  scenario = Scenario.find_by_coordinate(0,0).init_server
   EM.start_server('0.0.0.0', 8000, FirstGold::Server::Connection) {|conn|
-    conn.scenario = Scenario.find_by_coordinate(0,0).init_server
+    conn.scenario = scenario
   }
 }
 irb_t.join
